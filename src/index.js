@@ -1,4 +1,5 @@
 let addToy = false;
+const toyCollection = document.getElementById("toy-collection")
 
 document.addEventListener("DOMContentLoaded", () => {
   const addBtn = document.querySelector("#new-toy-btn");
@@ -13,3 +14,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+function getToys(){
+  fetch("http://localhost:3000/toys")
+  .then(resp => resp.json())
+  .then(showToys)
+}
+
+function showToys(toys){
+  for (toy of toys) {
+    const toyDiv = document.createElement("div")
+    toyDiv.classList.add("card")
+    toyCollection.appendChild(toyDiv)
+  }
+}
